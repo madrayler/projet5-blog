@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello {{ controller_name }}!{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+	<h1>Gerer les articles</h1>
+
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-success">
+			{{ message}}
+		</div>
+	{% endfor %}
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Titre</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for article in articles %}
+
+			<tr>
+				<td>{{ article.title }}</td>
+				<td class="row" >
+					<a href="{{ path('admin_edit', {'id': article.id}) }}" class="btn btn-secondary col-md-4">Modifier</a>
+					<form method="post" action="{{ path('admin_delete', {id: article.id}) }}" onsubmit="return confirm('Etes vous sûr de Supprimer ?')">
+						<input type="hidden" name="_method" value="DELETE" class="col-md-6">
+						<input type="hidden" name="_token" value="{{ csrf_token('delete', article.id)}}">
+						<button class="btn btn-danger">Supprimer</button>
+					</form>
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	<div class="text-right">
+		<a href="{{ path('admin_create') }}" class="btn btn-primary">Ajouter un article</a>
+	</div>
+</div>
+{% endblock %}

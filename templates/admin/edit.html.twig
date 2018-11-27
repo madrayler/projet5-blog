@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme formArticle 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+
+	<div class="container mt-4">
+		<h1>Modifier l'article</h1>
+		{{ include('admin/_form.html.twig', {button: 'Modifier'})}}
+	</div>
+
+{% endblock %}
