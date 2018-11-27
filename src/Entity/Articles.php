@@ -63,11 +63,11 @@ class Articles
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="article", orphanRemoval=true)
      */
     private $comments;
-
+/*
     /**
      * @ORM\Column(type="datetime")
      */
-    private $updated_at;
+   // private $updated_at;
 
     public function __construct()
     {
@@ -109,9 +109,9 @@ class Articles
     public function setImageFile(?File $image = null): void
     {
         $this->imageFile = $image;
-        if ($this->imageFile instanceof UploadedFile) {
+        /*if ($this->imageFile instanceof UploadedFile) {
             $this->updated_at = new \DateTime('now');
-        }
+        }*/
     }
 
     public function getImageFile(): ?File
@@ -184,7 +184,7 @@ class Articles
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeInterface
+   /* public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updated_at;
     }
@@ -194,5 +194,5 @@ class Articles
         $this->updated_at = $updated_at;
 
         return $this;
-    }
+    }*/
 }

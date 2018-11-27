@@ -11,11 +11,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Category
 {
-    const CATEGORY = [
-        0 => 'Journal',
-        1 => 'Fil d\'actualité',
-        2 => 'Blog'
-    ];
     
     /**
      * @ORM\Id()
