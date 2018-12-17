@@ -19,14 +19,6 @@ class ArticlesRepository extends ServiceEntityRepository
         parent::__construct($registry, Articles::class);
     }
 
-    /**
-    * @return Query
-    */
-    public function findAllVisibleQuery():Query
-    {
-        return $this->findVisibleQuery()
-            ->getQuery();
-    }
 
     // /**
     //  * @return Articles[] Returns an array of Articles objects

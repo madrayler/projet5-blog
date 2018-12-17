@@ -5,6 +5,8 @@ namespace App\Listener;
 use Doctrine\Common\EventSubscriber;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
+use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
+use Doctrine\ORM\Event\PreUpdateEventArgs;
 
 class ImageCacheSubscriber implements EventSubscriber
 {
@@ -37,12 +39,18 @@ class ImageCacheSubscriber implements EventSubscriber
 		if (!$entity instanceof Articles){
 			return;
 		}
+		if (!$entity instanceof ProgrammeTv){
+			return;
+		}
 		$this->$cacheManager->remove($this->uploaderHelper->asset($entity,'imageFile'));
 	}
 
 	public function preUpdate(PreUpdateEventArgs $args){
 		$entity = $args->getEntity();
 		if (!$entity instanceof Articles){
+			return;
+		}
+		if (!$entity instanceof ProgrammeTv){
 			return;
 		}
 		if ($entity->getImageFile() instanceof UploadedFile){

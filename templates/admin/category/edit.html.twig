@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% form_theme formArticle 'bootstrap_4_layout.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
 
 {% block body %}
 
-	<div class="container mt-4">
+	<div class="createArticle">
 		<h1>Modifier la categorie</h1>
 		{{ include('admin/category/_form.html.twig', {button: 'Modifier'})}}
 	</div>

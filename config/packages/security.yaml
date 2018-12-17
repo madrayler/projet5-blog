@@ -16,15 +16,14 @@ security:
         main:
             anonymous: true
 
-           # provider: in_database
+            provider: in_database
 
-            #form_login:
-                #login_path: connect_login
-                #check_path: connect_login
-
-            #logout:
-                #path: /logout
-                #target: /blog
+            form_login:
+                login_path: connect_login
+                check_path: connect_login
+                csrf_parameter: _csrf_security_token
+                csrf_token_id: a_private_string
+                default_target_path: /blog
 
             logout:
                 path: /logout
@@ -34,12 +33,13 @@ security:
             # http_basic: true
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
 
-            form_login:
-                check_path: admin_login
+            #form_login:
+                #login_path: admin_login
+                #check_path: admin_login
             # https://symfony.com/doc/current/security/form_login_setup.html
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        #- { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/profile, roles: ROLE_USER }

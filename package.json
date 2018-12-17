@@ -1,17 +1,33 @@
 {
-    "devDependencies": {
-        "@symfony/webpack-encore": "^0.22.0",
-        "webpack-notifier": "^1.6.0"
-    },
-    "license": "UNLICENSED",
-    "private": true,
-    "scripts": {
-        "dev-server": "encore dev-server",
-        "dev": "encore dev",
-        "watch": "encore dev --watch",
-        "build": "encore production --progress"
-    },
-    "dependencies": {
-        "express": "^4.16.4"
-    }
+  "devDependencies": {
+    "@symfony/webpack-encore": "^0.22.0",
+    "webpack-notifier": "^1.6.0"
+  },
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "dev-server": "encore dev-server",
+    "dev": "encore dev",
+    "watch": "encore dev --watch",
+    "build": "encore production"
+  },
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "name": "projet5-blog",
+  "version": "1.0.0",
+  "main": "webpack.config.js",
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/madrayler/projet5-blog.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/madrayler/projet5-blog/issues"
+  },
+  "homepage": "https://github.com/madrayler/projet5-blog#readme",
+  "description": ""
 }

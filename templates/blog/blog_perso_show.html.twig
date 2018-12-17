@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}blog-detailBlogPerso-{{ parent() }}{% endblock %}
+
+{% block body %}
+<div class="container"> 
+  <div class="row show_blog">
+    <div class="col-md-8">
+      <h2>{{ articles.title }}</h2>
+      <div class="metadata">{{ articles.category.title }}: Mise en ligne le {{ articles.createdAt|date('d/m/y')}} à {{ articles.createdAt | date('H:i') }}, {{ articles.comments|length }} Commentaires  </div>
+      <div class="content-show">
+        {% if articles.imagename %}
+          <img src="{{ vich_uploader_asset(articles, 'imageFile') | imagine_filter('medium') }}" alt="card-img-top" class="float-left">
+        {% endif %}
+        {{ articles.content|raw }}
+      </div>  
+    
+      <section id="commentaires">
+        <h4>{{ articles.comments|length }} Commentaires :</h4>
+        {% for comment in articles.comments %}
+        
+          <span>{{ comment.author|title}}</span> <small>{{ comment.createdAt|date('d/m/y à H:i')}}</small>
+        
+          {{ comment.content|raw}}
+        <hr>
+        {% endfor %}
+
+      {% if app.user %}
+        {{ form_start(commentForm) }}
+        {{ form_row(commentForm.author, {'attr': {'placeholder': "Votre nom"}}) }}
+        {{ form_row(commentForm.content, {'attr': {'placeholder': "Votre commentaire"}}) }}
+
+        <button type="submit" class="btn btn-success">Commenter</button>
+        {{ form_end(commentForm) }}
+
+      {% else %}
+        <h3>Connectez-vous pour commenter !</h3>
+        <a href="{{ path('connect_login')}}" class="btn btn-primary">Connexion</a>
+      {% endif %}
+
+      </section>
+    </div>
+    <div class="col-md-4 actu-show">
+      <h4>Autres contenus du blog</h4>
+      {% for articles in articlesBlog %}
+        <div class="metadata">
+          <span class="date">{{ articles.createdAt|date('d/m') }}</span>
+          <a href="{{ path('blog_perso_show',{'id': articles.id}) }}" class="titreActualite">{{ articles.title }}</a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

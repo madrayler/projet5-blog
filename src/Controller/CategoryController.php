@@ -16,17 +16,22 @@ use Symfony\Component\Routing\Annotation\Route;
 class CategoryController extends AbstractController
 {
     /**
-     * @Route("/", name="category_index", methods="GET")
+     * @Route("/index", name="category_index", methods="GET")
      */
-    public function index(CategoryRepository $categoryRepository): Response
+    public function index()
     {
-        return $this->render('admin/category/index.html.twig', ['categories' => $categoryRepository->findAll()]);
+        $repo = $this->getDoctrine()->getRepository(Category::class);
+        $category = $repo->findAll();
+
+        return $this->render('admin/category/index.html.twig', [
+            'category' => $category
+        ]);
     }
 
     /**
-     * @Route("/new", name="category_new", methods="GET|POST")
+     * @Route("/new", name="category_create", methods="GET|POST")
      */
-    public function new(Request $request): Response
+    public function create(Request $request): Response
     {
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category);
@@ -40,7 +45,7 @@ class CategoryController extends AbstractController
             return $this->redirectToRoute('category_index');
         }
 
-        return $this->render('admin/category/new.html.twig', [
+        return $this->render('admin/category/create.html.twig', [
             'category' => $category,
             'form' => $form->createView(),
         ]);

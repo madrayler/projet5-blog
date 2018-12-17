@@ -1,0 +1,22 @@
+<article>
+	{% for article in dernierArticle %}
+	<div class="card-body">	
+	<h3 class="title"><a href="{{ path('blog_show',{'id': article.id}) }}">{{ article.title }}</a></h3>
+	<div class="content">
+		<div class="row">
+			<div class="col-md-6">
+				{% if article.imagename %}
+					<a href="{{ path('blog_show',{'id': article.id}) }}"><img src="{{ vich_uploader_asset(article, 'imageFile') | imagine_filter('thumb') }}" alt="card-img-top"></a>
+				{% endif %}
+			</div>
+			<div class="col-md-5 text">
+				<div class="metadata">
+					<span class="date">{{ article.createdAt | date('d/m') }}</span> - {{ article.content|slice(0,300)|raw }}
+				</div>
+				<a href="{{ path('blog_show',{'id': article.id}) }}">Lire...</a>
+			</div>
+		</div>
+	</div>
+	</div>
+	{% endfor %}
+</article>

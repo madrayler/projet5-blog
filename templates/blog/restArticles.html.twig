@@ -1,0 +1,21 @@
+<div class="row">
+{% for article in restArticles %}	
+	<div class="col-md-4">
+		
+		{% if article.imagename %}
+			<a href="{{ path('blog_show',{'id': article.id}) }}"><img src="{{ vich_uploader_asset(article, 'imageFile') }}" alt="card-img-top" class="imageRestArticles"></a>
+		{% endif %}
+		
+		<div class="titreRestArticles"><a href="{{ path('blog_show',{'id': article.id}) }}">{{ article.title }}</a></div>
+		
+		<div class="text">
+			<div class="metadata">
+				<span class="date">{{ article.createdAt | date('d/m') }}</span> - {{ article.content|slice(0,200)|raw }}
+			</div>
+			<a href="{{ path('blog_show',{'id': article.id}) }}">Lire...</a>
+		</div>
+
+	</div>
+{% endfor %}
+</div>
+

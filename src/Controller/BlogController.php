@@ -7,6 +7,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Common\Persistence\ObjectManager;
 use App\Entity\Articles;
 use App\Entity\Comment;
+use App\Entity\Category;
+use App\Entity\ProgrammeTv;
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\ArticlesRepository;
 use Symfony\Component\Form\Createview;
@@ -21,68 +23,222 @@ use Knp\Component\Pager\PaginatorInterface;
 class BlogController extends AbstractController 
 {
     /**
-    * @var ArticlesRepository
-    */
-    private $repository;
-    public function _construct(ArticlesRepository $repository)
-    {
-        $this->repository = $repository;
-    }
-    /**
      * @Route("/blog", name="blog")
      */
-    public function index(PaginatorInterface $paginator, Request $request):Response
+    public function index()
     {
-        $articles = $paginator->paginate(
-            $this->repository->findAllVisibleQuery(),
-            $request->query->getInt('page', 1),
-            5
+        $repo = $this->getDoctrine()->getRepository(Articles::class);
+        $dernierArticle = $repo->findBy(['category' => ['1', '4', '5', '6', '7']],
+                                           ['createdAt' => 'desc'],
+                                           1,
+                                           0
         );
-     
-        return $this->render('blog/index.html.twig', [
-            'controller_name' => 'BlogController',
-            'articles' => $articles,
-            'pagination' => $pagination
-        ]);
-    }
-/*
-    /**
-    * @Route("/home", name="home")
-    */
-   /* public function home()
-    {
-    	return $this->render('blog/home.html.twig');
-    }*/
 
-    /**
-    * @Route("/blog/new", name="blog_create")
-    * @Route("/blog/{id}/edit", name="blog_edit")
-    */
-    public function form(Articles $articles = null, Request $request, ObjectManager $manager)
-    {
-        if(!$articles){
-            $articles = new Articles();
-        }
+        $listArticles = $repo->findBy(['category' => ['1', '4', '5', '6', '7']],
+                                  ['createdAt' => 'desc'],
+                                  4,
+                                  1
+        );
+
+        $restArticles = $repo->findBy(['category' => ['1', '4', '5', '6', '7']],
+                                  ['createdAt' => 'desc'],
+                                  3,
+                                  5
+        );
+
+        $actualite = $repo->findBy(['category' => '2'],
+                                  ['createdAt' => 'desc'],
+                                  35
+        );
         
-       $form = $this->createForm(ArticleType::class, $articles);
-
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()){
-            if(!$articles->getId()){
-                $articles->setCreatedAt(new \DateTime());
-            }
-
-            $manager->persist($articles);
-            $manager->flush();
-
-            return $this-> redirectToRoute('blog_show', ['id' => $articles->getId()]);
-        }
-        return $this->render('blog/create.html.twig', [
-            'formArticle' => $form->createView(),
-            'editMode' => $articles->getId() !== null
+        return $this->render('blog/index.html.twig', [
+            'dernierArticle' => $dernierArticle,
+            'listArticles' => $listArticles,
+            'restArticles' => $restArticles,
+            'actualite' => $actualite
         ]);
     }
+
+    /**
+     * @Route("/ligue1", name="ligue_un")
+     */
+    public function ligue1()
+    {
+        $repo = $this->getDoctrine()->getRepository(Articles::class);
+        $dernierArticle = $repo->findBy(['category' => '1'],
+                                  ['createdAt' => 'desc'],
+                                  1
+        );
+
+        $listArticles = $repo->findBy(['category' => '1'],
+                                  ['createdAt' => 'desc'],
+                                  4,
+                                  1
+        );
+
+        $restArticles = $repo->findBy(['category' => '1'],
+                                  ['createdAt' => 'desc'],
+                                  5,
+                                  5
+        );
+
+        $actualite = $repo->findBy(['category' => '2'],
+                                  ['createdAt' => 'desc'],
+                                  35
+        );
+        
+        return $this->render('blog/index.html.twig', [
+            'dernierArticle' => $dernierArticle,
+            'listArticles' => $listArticles,
+            'restArticles' => $restArticles,
+            'actualite' => $actualite
+        ]);
+    }
+
+    /**
+     * @Route("/etranger", name="etranger")
+     */
+    public function etranger()
+    {
+        $repo = $this->getDoctrine()->getRepository(Articles::class);
+        $dernierArticle = $repo->findBy(['category' => '4'],
+                                  ['createdAt' => 'desc'],
+                                  1
+        );
+
+        $listArticles = $repo->findBy(['category' => '4'],
+                                  ['createdAt' => 'desc'],
+                                  4,
+                                  1
+        );
+
+        $restArticles = $repo->findBy(['category' => '4'],
+                                  ['createdAt' => 'desc'],
+                                  5,
+                                  5
+        );
+
+        $actualite = $repo->findBy(['category' => '2'],
+                                  ['createdAt' => 'desc'],
+                                  35
+        );
+        
+        return $this->render('blog/index.html.twig', [
+            'dernierArticle' => $dernierArticle,
+            'listArticles' => $listArticles,
+            'restArticles' => $restArticles,
+            'actualite' => $actualite
+        ]);
+    }
+
+    /**
+     * @Route("/coupedeurope", name="coupe_europe")
+     */
+    public function coupedeurope()
+    {
+        $repo = $this->getDoctrine()->getRepository(Articles::class);
+        $dernierArticle = $repo->findBy(['category' => '5'],
+                                  ['createdAt' => 'desc'],
+                                  1
+        );
+
+        $listArticles = $repo->findBy(['category' => '5'],
+                                  ['createdAt' => 'desc'],
+                                  4,
+                                  1
+        );
+
+        $restArticles = $repo->findBy(['category' => '5'],
+                                  ['createdAt' => 'desc'],
+                                  5,
+                                  5
+        );
+
+        $actualite = $repo->findBy(['category' => '2'],
+                                  ['createdAt' => 'desc'],
+                                  35
+        );
+        
+        return $this->render('blog/index.html.twig', [
+            'dernierArticle' => $dernierArticle,
+            'listArticles' => $listArticles,
+            'restArticles' => $restArticles,
+            'actualite' => $actualite
+        ]);
+    }
+
+    /**
+     * @Route("/bleuinternational", name="bleu_international")
+     */
+    public function bleuinternational()
+    {
+        $repo = $this->getDoctrine()->getRepository(Articles::class);
+        $dernierArticle = $repo->findBy(['category' => '6'],
+                                  ['createdAt' => 'desc'],
+                                  1
+        );
+
+        $listArticles = $repo->findBy(['category' => '6'],
+                                  ['createdAt' => 'desc'],
+                                  4,
+                                  1
+        );
+
+        $restArticles = $repo->findBy(['category' => '6'],
+                                  ['createdAt' => 'desc'],
+                                  5,
+                                  5
+        );
+
+        $actualite = $repo->findBy(['category' => '2'],
+                                  ['createdAt' => 'desc'],
+                                  35
+        );
+        
+        return $this->render('blog/index.html.twig', [
+            'dernierArticle' => $dernierArticle,
+            'listArticles' => $listArticles,
+            'restArticles' => $restArticles,
+            'actualite' => $actualite
+        ]);
+    }
+
+    /**
+     * @Route("/mercato", name="mercato")
+     */
+    public function mercato()
+    {
+        $repo = $this->getDoctrine()->getRepository(Articles::class);
+        $dernierArticle = $repo->findBy(['category' => '7'],
+                                  ['createdAt' => 'desc'],
+                                  1
+        );
+
+        $listArticles = $repo->findBy(['category' => '7'],
+                                  ['createdAt' => 'desc'],
+                                  4,
+                                  1
+        );
+
+        $restArticles = $repo->findBy(['category' => '7'],
+                                  ['createdAt' => 'desc'],
+                                  5,
+                                  5
+        );
+
+        $actualite = $repo->findBy(['category' => '2'],
+                                  ['createdAt' => 'desc'],
+                                  35
+        );
+        
+        return $this->render('blog/mercato.html.twig', [
+            'dernierArticle' => $dernierArticle,
+            'listArticles' => $listArticles,
+            'restArticles' => $restArticles,
+            'actualite' => $actualite
+        ]);
+    }
+
 
     /**
     * @Route("/blog/{id}", name="blog_show")
@@ -102,9 +258,82 @@ class BlogController extends AbstractController
             return $this->redirectToRoute('blog_show', ['id' => $articles->getId()]);
         }
 
+        $repo = $this->getDoctrine()->getRepository(Articles::class);
+        $actualite = $repo->findBy(['category' => '2'],
+                                  ['createdAt' => 'desc'],
+                                  35
+        );
+
     	return $this->render('blog/show.html.twig', [
             'articles' => $articles,
+            'actualite' => $actualite,
             'commentForm' => $form->createView()
+            ]);
+    }
+
+    /**
+     * @Route("/blogperso", name="blogperso")
+     */
+    public function blogperso(Request $request)
+    {
+        $repo = $this->getDoctrine()->getRepository(Articles::class);
+        $articlesBlog = $repo->findBy(['category' => '3'],
+                                  ['createdAt' => 'desc'],
+                                  40,
+                                  0
+                            
+        );
+     
+        return $this->render('blog/blogperso.html.twig', [
+            'articlesBlog' => $articlesBlog
+        ]);
+    }
+
+    /**
+    * @Route("/blogperso/{id}", name="blog_perso_show")
+    */
+    public function blog_show(Articles $articles, Request $request, ObjectManager $manager)
+    {
+      $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $comment->setCreatedAt(new \DateTime())
+                    ->setArticle($articles);
+            $manager->persist($comment);
+            $manager->flush();
+
+            return $this->redirectToRoute('blog_perso_show', ['id' => $articles->getId()]);
+        }
+
+        $repo = $this->getDoctrine()->getRepository(Articles::class);
+        $articlesBlog = $repo->findBy(['category' => '3'],
+                                  ['createdAt' => 'desc'],
+                                  40,
+                                  0
+                            
+        );
+
+      return $this->render('blog/blog_perso_show.html.twig', [
+            'articles' => $articles,
+            'articlesBlog' => $articlesBlog
+            ]);
+    }
+
+    /**
+    * @Route("/bons_plans", name="bons_plans")
+    */
+    public function bonsPlans()
+    {
+      $repo = $this->getDoctrine()->getRepository(Articles::class);
+        $actualite = $repo->findBy(['category' => '2'],
+                                  ['createdAt' => 'desc'],
+                                  35
+        );
+
+      return $this->render('blog/bons_plans.html.twig', [
+            'actualite' => $actualite
             ]);
     }
 

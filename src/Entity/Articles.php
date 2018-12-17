@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\UploadedFile;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArticlesRepository")
@@ -42,9 +43,9 @@ class Articles
     private $imageFile;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      *
-     * @var string|null
+     * @var string|nullable=true
      */
     private $imageName;
 
@@ -67,7 +68,7 @@ class Articles
     /**
      * @ORM\Column(type="datetime")
      */
-   // private $updated_at;
+    private $updated_at;
 
     public function __construct()
     {
@@ -109,9 +110,9 @@ class Articles
     public function setImageFile(?File $image = null): void
     {
         $this->imageFile = $image;
-        /*if ($this->imageFile instanceof UploadedFile) {
+        if ($this->imageFile instanceof UploadedFile) {
             $this->updated_at = new \DateTime('now');
-        }*/
+        }
     }
 
     public function getImageFile(): ?File
@@ -184,7 +185,7 @@ class Articles
         return $this;
     }
 
-   /* public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updated_at;
     }
@@ -194,5 +195,5 @@ class Articles
         $this->updated_at = $updated_at;
 
         return $this;
-    }*/
+    }
 }

@@ -27,11 +27,12 @@ class ConnectController extends AbstractController
 		if($form->isSubmitted() && $form->isValid()){
 			$hash = $encoder->encodePassword($user, $user->getPassword());
 			$user->setPassword($hash);
+			$user->setRoles(['ROLE_USER']);
 			
 			$manager->persist($user);
 			$manager->flush();
 
-			return $this->redirectToRoute('connect_login');
+			return $this->redirectToRoute('admin');
 		}
 
 		return $this->render('connect/registration.html.twig', [
@@ -45,6 +46,7 @@ class ConnectController extends AbstractController
 	{
 		$error =$authenticationUtils->getLastAuthenticationError();
 		$lasUsername = $authenticationUtils->getLastUsername();
+
 		return $this->render('connect/login.html.twig', [
 			'last_username' => $lasUsername,
 			'error' => $error]);

@@ -1,26 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello {{ controller_name }}!{% endblock %}
+{% block title %}blog-Accueil-{{ parent() }}{% endblock %}
 
 {% block body %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-8">
+			<div class="dernierArticle">
+				{{ include('blog/dernierArticle.html.twig')}}
+			</div>
 
-<section class="articles">
-	{% for article in articles %}
-		<article>
-			<h2>{{ article.title }}</h2>
-			<div class="metadata">Ecrit le {{ article.createdAt | date('d/m/y') }} à {{ article.createdAt | date('h:i') }}
+			<hr>
+
+			<div class="listArticles">
+				{{ include('blog/listArticles.html.twig') }}
 			</div>
-			<div class="content">
-				{% if articles.imagename %}
-				<img src="{{ vich_uploader_asset(articles, 'imageFile') | imagine_filter('thumb') }}" alt="card-img-top" width="100%" height="auto">
-				{% endif %}
-				{{ article.content | raw }}
-				<a href="{{ path('blog_show',{'id': article.id}) }}" class="btn btn-primary">Lire la suite</a>
+
+			<hr>
+
+			<div class="restArticles">
+				{{ include('blog/restArticles.html.twig')}}
 			</div>
-		</article>
-	{% endfor %}
-</section>
-<div class="navigation">
-	{{ knp_pagination_render(pagination) }}
-<div>
+
+			<hr>
+		</div>
+		<div class="col-md-4 actualite">
+			{{ include('blog/actualite.html.twig')}}
+		</div>
+	</div>
+</div>
 {% endblock %}

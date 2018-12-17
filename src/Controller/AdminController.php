@@ -27,32 +27,119 @@ class AdminController extends AbstractController
     public function index()
     {
     	$repo = $this->getDoctrine()->getRepository(Articles::class);
-    	$articles = $repo->findAll();
+    	$articles = $repo->findBy(['category' => ['1', '4', '5', '6', '7']],
+                                    ['createdAt' => 'desc'],
+                                    10,
+                                    0);
 
         return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
             'articles' => $articles
         ]);
     }
 
     /**
-    * @Route("/connexion", name="admin_login")
+    * @Route("/admin/ligue1", name="admin_ligue_1")
     */
-    public function login(AuthenticationUtils $authenticationUtils)
+    public function categoryLigue1()
     {
-        $error =$authenticationUtils->getLastAuthenticationError();
-        $lasUsername = $authenticationUtils->getLastUsername();
-        return $this->render('admin/login.html.twig', [
-            'last_username' => $lasUsername,
-            'error' => $error]);
+        $repo = $this->getDoctrine()->getRepository(Articles::class);
+        $articles = $repo->findBy(['category' => '1'],
+                                     ['createdAt' => 'desc'],
+                                     30,
+                                     0
+        );
+        return $this->render('admin/ligue1.html.twig', [
+            'articles' => $articles]);
     }
 
     /**
-    * @Route("/deconnexion", name="admin_logout")
+    * @Route("/admin/actualite", name="admin_actualite")
     */
-    public function logout()
+    public function categoryActualite()
     {
-        return $this->render('admin/logout.html.twig');
+        $repo = $this->getDoctrine()->getRepository(Articles::class);
+        $articles = $repo->findBy(['category' => '2'],
+                                     ['createdAt' => 'desc'],
+                                     50,
+                                     0
+        );
+        return $this->render('admin/actualite.html.twig', [
+            'articles' => $articles]);
+    }
+
+    /**
+    * @Route("/admin/blog", name="admin_blog")
+    */
+    public function categoryBlog()
+    {
+        $repo = $this->getDoctrine()->getRepository(Articles::class);
+        $articles = $repo->findBy(['category' => '3'],
+                                     ['createdAt' => 'desc'],
+                                     10,
+                                     0
+        );
+        return $this->render('admin/blog.html.twig', [
+            'articles' => $articles]);
+    }
+
+    /**
+    * @Route("/admin/etranger", name="admin_etranger")
+    */
+    public function categoryEtranger()
+    {
+        $repo = $this->getDoctrine()->getRepository(Articles::class);
+        $articles = $repo->findBy(['category' => '4'],
+                                     ['createdAt' => 'desc'],
+                                     30,
+                                     0
+        );
+        return $this->render('admin/etranger.html.twig', [
+            'articles' => $articles]);
+    }
+
+    /**
+    * @Route("/admin/coupedeurope", name="admin_coupe_europe")
+    */
+    public function categoryCoupedeurope()
+    {
+        $repo = $this->getDoctrine()->getRepository(Articles::class);
+        $articles = $repo->findBy(['category' => '5'],
+                                     ['createdAt' => 'desc'],
+                                     30,
+                                     0
+        );
+        return $this->render('admin/coupedeurope.html.twig', [
+            'articles' => $articles]);
+    }
+
+    /**
+    * @Route("/admin/bleuinternational", name="admin_bleu_international")
+    */
+    public function categoryBleuinternational()
+    {
+        $repo = $this->getDoctrine()->getRepository(Articles::class);
+        $articles = $repo->findBy(['category' => '6'],
+                                     ['createdAt' => 'desc'],
+                                     30,
+                                     0
+        );
+        return $this->render('admin/bleuinternational.html.twig', [
+            'articles' => $articles]);
+    }
+
+    /**
+    * @Route("/admin/mercato", name="admin_mercato")
+    */
+    public function categoryMercato()
+    {
+        $repo = $this->getDoctrine()->getRepository(Articles::class);
+        $articles = $repo->findBy(['category' => '7'],
+                                     ['createdAt' => 'desc'],
+                                     30,
+                                     0
+        );
+        return $this->render('admin/mercato.html.twig', [
+            'articles' => $articles]);
     }
 
     /**
@@ -118,4 +205,5 @@ class AdminController extends AbstractController
 		}
 		return $this->redirectToRoute('admin');
 	}
+
 }
