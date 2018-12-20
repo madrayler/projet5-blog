@@ -9,10 +9,24 @@ security:
             entity:
                 class: App\Entity\User
                 property: username
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        admin:
+            pattern: ^/admin
+            anonymous: true
+
+            provider: in_database
+
+            form_login:
+                login_path: admin_connect_login
+                check_path: admin_connect_login 
+
+            logout:
+                path: /logout
+                target: blog       
         main:
             anonymous: true
 
@@ -41,5 +55,6 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
+        #- { path: ^/admin/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         #- { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/profile, roles: ROLE_USER }
+        #- { path: ^/profile, roles: ROLE_USER }

@@ -17,7 +17,9 @@ class Comment
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * //@ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="comments")
+     * //@ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="string")
      */
     private $author;
 

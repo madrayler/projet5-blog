@@ -19,7 +19,11 @@
 }
 nav
 {
-	height: 20px;
+	height: 40px;
+}
+.navbar-nav a.active
+{
+	color: #ccc;
 }
 
 /*BLOG*/
@@ -33,9 +37,13 @@ nav
 	background-color: blue;
 	color: white;
 }
+.content img
+{
+	width: 100%;
+}
 .text
 {
-	margin: auto;
+	width: 100%;
 	text-align: justify;
 }
 .date
@@ -45,9 +53,9 @@ nav
 }
 .title a
 {
-	text-decoration: none;
 	color: blue;
 	font-weight: bold;
+	text-decoration: none;
 }
 .text a
 {
@@ -286,6 +294,10 @@ nav
 .createArticle h1
 {
 	margin-top: 20px;
+}
+.dropdown-item
+{
+	color: blue;
 }
 
 /*COMMENTAIRES*/

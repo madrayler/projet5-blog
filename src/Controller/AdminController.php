@@ -32,7 +32,7 @@ class AdminController extends AbstractController
                                     10,
                                     0);
 
-        return $this->render('admin/index.html.twig', [
+        return $this->render('admin/admin_pages/index.html.twig', [
             'articles' => $articles
         ]);
     }
@@ -48,7 +48,7 @@ class AdminController extends AbstractController
                                      30,
                                      0
         );
-        return $this->render('admin/ligue1.html.twig', [
+        return $this->render('admin/admin_pages/ligue1.html.twig', [
             'articles' => $articles]);
     }
 
@@ -63,7 +63,7 @@ class AdminController extends AbstractController
                                      50,
                                      0
         );
-        return $this->render('admin/actualite.html.twig', [
+        return $this->render('admin/admin_pages/actualite.html.twig', [
             'articles' => $articles]);
     }
 
@@ -78,7 +78,7 @@ class AdminController extends AbstractController
                                      10,
                                      0
         );
-        return $this->render('admin/blog.html.twig', [
+        return $this->render('admin/admin_pages/blog.html.twig', [
             'articles' => $articles]);
     }
 
@@ -93,7 +93,7 @@ class AdminController extends AbstractController
                                      30,
                                      0
         );
-        return $this->render('admin/etranger.html.twig', [
+        return $this->render('admin/admin_pages/etranger.html.twig', [
             'articles' => $articles]);
     }
 
@@ -108,7 +108,7 @@ class AdminController extends AbstractController
                                      30,
                                      0
         );
-        return $this->render('admin/coupedeurope.html.twig', [
+        return $this->render('admin/admin_pages/coupedeurope.html.twig', [
             'articles' => $articles]);
     }
 
@@ -123,7 +123,7 @@ class AdminController extends AbstractController
                                      30,
                                      0
         );
-        return $this->render('admin/bleuinternational.html.twig', [
+        return $this->render('admin/admin_pages/bleuinternational.html.twig', [
             'articles' => $articles]);
     }
 
@@ -138,7 +138,7 @@ class AdminController extends AbstractController
                                      30,
                                      0
         );
-        return $this->render('admin/mercato.html.twig', [
+        return $this->render('admin/admin_pages/mercato.html.twig', [
             'articles' => $articles]);
     }
 
@@ -162,7 +162,7 @@ class AdminController extends AbstractController
 
             return $this-> redirectToRoute('admin');
         }
-    	return $this->render('admin/create.html.twig', [
+    	return $this->render('admin/admin_pages/create.html.twig', [
     		'articles' => $articles,
     		'formArticle' => $form->createView()
     	]);
@@ -185,7 +185,7 @@ class AdminController extends AbstractController
 
             return $this->redirectToRoute('admin');
         }
-    	return $this->render('admin/edit.html.twig', [
+    	return $this->render('admin/admin_pages/edit.html.twig', [
     		'articles' => $articles,
     		'formArticle' => $form->createView()
     	]);

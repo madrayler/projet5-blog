@@ -2,13 +2,14 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * @ORM\Table(name="`user`")
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity(
  *  fields= {"email"},
@@ -26,11 +27,13 @@ class User implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Email(message="Veuillez renseigner un email valide !")
     */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Veuillez renseigner un nom d'utilisateur valide !")
     */
     private $username;
 
@@ -46,9 +49,14 @@ class User implements UserInterface, \Serializable
     public $confirm_password;
 
     /**
-     * @ORM\Column(type="array")
-    */
-    private $roles;
+     * @ORM\ManyToMany(targetEntity="App\Entity\Role", mappedBy="users")
+     */
+    private $userRoles;
+
+    public function __construct()
+    {
+        $this->userRoles = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -100,12 +108,12 @@ class User implements UserInterface, \Serializable
     }
 
     public function getRoles() {
-        return ['ROLE_USER'];
-    }
+        $roles = $this->userRoles->map(function($role){
+            return $role->getTitle();
+        })->toArray();
 
-
-    public function setRoles($roles) {
-        $this->roles = $roles;
+        $roles[] = 'ROLE_USER';
+        return $roles;
     }
 
     /** @see \Serializable::serialize()
@@ -128,6 +136,34 @@ class User implements UserInterface, \Serializable
             $this->username,
             $this->password
         ) = unserialize($serialized, ['allowed_classes' => false]);
+    }
+
+    /**
+     * @return Collection|Role[]
+     */
+    public function getUserRoles(): Collection
+    {
+        return $this->userRoles;
+    }
+
+    public function addUserRole(Role $userRole): self
+    {
+        if (!$this->userRoles->contains($userRole)) {
+            $this->userRoles[] = $userRole;
+            $userRole->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserRole(Role $userRole): self
+    {
+        if ($this->userRoles->contains($userRole)) {
+            $this->userRoles->removeElement($userRole);
+            $userRole->removeUser($this);
+        }
+
+        return $this;
     }
 
 }

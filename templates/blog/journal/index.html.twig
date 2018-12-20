@@ -1,0 +1,32 @@
+{% extends 'blog/base.html.twig' %}
+
+{% block title %}blog-Accueil-{{ parent() }}{% endblock %}
+
+{% block body %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-8">
+			<div class="dernierArticle">
+				{{ include('blog/journal/dernierArticle.html.twig')}}
+			</div>
+
+			<hr>
+
+			<div class="listArticles">
+				{{ include('blog/journal/listArticles.html.twig') }}
+			</div>
+
+			<hr>
+
+			<div class="restArticles">
+				{{ include('blog/journal/restArticles.html.twig')}}
+			</div>
+
+			<hr>
+		</div>
+		<div class="col-md-4 actualite">
+			{{ include('blog/journal/actualite.html.twig')}}
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -51,7 +51,7 @@ class BlogController extends AbstractController
                                   35
         );
         
-        return $this->render('blog/index.html.twig', [
+        return $this->render('blog/journal/index.html.twig', [
             'dernierArticle' => $dernierArticle,
             'listArticles' => $listArticles,
             'restArticles' => $restArticles,
@@ -87,7 +87,7 @@ class BlogController extends AbstractController
                                   35
         );
         
-        return $this->render('blog/index.html.twig', [
+        return $this->render('blog/journal/index.html.twig', [
             'dernierArticle' => $dernierArticle,
             'listArticles' => $listArticles,
             'restArticles' => $restArticles,
@@ -123,7 +123,7 @@ class BlogController extends AbstractController
                                   35
         );
         
-        return $this->render('blog/index.html.twig', [
+        return $this->render('blog/journal/index.html.twig', [
             'dernierArticle' => $dernierArticle,
             'listArticles' => $listArticles,
             'restArticles' => $restArticles,
@@ -159,7 +159,7 @@ class BlogController extends AbstractController
                                   35
         );
         
-        return $this->render('blog/index.html.twig', [
+        return $this->render('blog/journal/index.html.twig', [
             'dernierArticle' => $dernierArticle,
             'listArticles' => $listArticles,
             'restArticles' => $restArticles,
@@ -195,7 +195,7 @@ class BlogController extends AbstractController
                                   35
         );
         
-        return $this->render('blog/index.html.twig', [
+        return $this->render('blog/journal/index.html.twig', [
             'dernierArticle' => $dernierArticle,
             'listArticles' => $listArticles,
             'restArticles' => $restArticles,
@@ -231,7 +231,7 @@ class BlogController extends AbstractController
                                   35
         );
         
-        return $this->render('blog/mercato.html.twig', [
+        return $this->render('blog/journal/mercato.html.twig', [
             'dernierArticle' => $dernierArticle,
             'listArticles' => $listArticles,
             'restArticles' => $restArticles,
@@ -251,7 +251,8 @@ class BlogController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()){
             $comment->setCreatedAt(new \DateTime())
-                    ->setArticle($articles);
+                    ->setArticle($articles)
+                    ->setAuthor($this->getUser());       
             $manager->persist($comment);
             $manager->flush();
 
@@ -264,7 +265,7 @@ class BlogController extends AbstractController
                                   35
         );
 
-    	return $this->render('blog/show.html.twig', [
+    	return $this->render('blog/journal/show.html.twig', [
             'articles' => $articles,
             'actualite' => $actualite,
             'commentForm' => $form->createView()
@@ -284,7 +285,7 @@ class BlogController extends AbstractController
                             
         );
      
-        return $this->render('blog/blogperso.html.twig', [
+        return $this->render('blog/journal/blogperso.html.twig', [
             'articlesBlog' => $articlesBlog
         ]);
     }
@@ -315,7 +316,7 @@ class BlogController extends AbstractController
                             
         );
 
-      return $this->render('blog/blog_perso_show.html.twig', [
+      return $this->render('blog/journal/blog_perso_show.html.twig', [
             'articles' => $articles,
             'articlesBlog' => $articlesBlog
             ]);
@@ -332,7 +333,7 @@ class BlogController extends AbstractController
                                   35
         );
 
-      return $this->render('blog/bons_plans.html.twig', [
+      return $this->render('blog/journal/bons_plans.html.twig', [
             'actualite' => $actualite
             ]);
     }
