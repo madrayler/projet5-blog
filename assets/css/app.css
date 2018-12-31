@@ -21,10 +21,7 @@ nav
 {
 	height: 40px;
 }
-.navbar-nav a.active
-{
-	color: #ccc;
-}
+
 
 /*BLOG*/
 /*DERNIER ARTICLE*/
@@ -69,7 +66,7 @@ nav
 	padding: 10px;
 	background-color: #dadfe1;
 }
-.articles:hover
+.survole:hover
 {
 	background-color: #d24d57;
 	border-bottom-right-radius: 20px;
@@ -84,7 +81,7 @@ nav
 	color: #abb7b7;
 }
 
-.titreArticles p
+.titreArticles h3
 {
 	color: blue;
 	font-size: 1.10em;
@@ -94,6 +91,12 @@ nav
 {
 	text-decoration: none;
 }
+.survole_contenu p
+{
+	overflow: hidden;
+}
+
+
 
 /*ACTUALITE*/
 
@@ -169,8 +172,8 @@ nav
 .blog
 {
 	margin-top: 20px;
-	margin-right: 120px;
-	margin-left: 135px;
+	margin-right: 85px;
+	margin-left: 90px;
 }
 .blog a
 {
@@ -181,7 +184,7 @@ nav
 }
 .blog img
 {
-	width: 250px;
+	width: 260px;
 	height: 200px;
 }
 .show_blog h2

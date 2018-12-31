@@ -1,15 +1,21 @@
 
 {% for articles in listArticles %}
 	<div class="articles">
-		
-		<a href="{{ path('blog_show',{'id': articles.id})}}">
-			<div class="metadata">
-				<span class="date">{{ articles.createdAt|date('d/m') }}</span> - <span class="categoryArticle">{{ articles.category.title|upper }}</span>
+		<div class="row anime">
+			<div class="col-md-8 survole">
+				<a href="{{ path('blog_show',{'id': articles.id})}}">
+				<div class="metadata">
+					<span class="date">{{ articles.createdAt|date('d/m') }}</span> - <span class="categoryArticle">{{ articles.category.title|upper }}</span>
+				</div>
+				<div class="titreArticles">
+					<h3>{{ articles.title }}</h3>
+				</div>
+				</a>
 			</div>
-			<div class="titreArticles">
-				<p>{{ articles.title }}</p>
-			</div>
-		</a>
 		
-	</div>
+			<div class="col-md-4 survole_contenu">	
+				<p>{{ articles.content|slice(0,100)|raw }}</p>
+			</div>
+		</div>
+	</div>		
 {% endfor %}

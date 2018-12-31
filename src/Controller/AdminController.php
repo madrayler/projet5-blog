@@ -18,14 +18,19 @@ use App\Form\ArticleType;
 use App\Form\CommentType;
 use Symfony\Component\BrowserKit\Response;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class AdminController extends AbstractController
 {
     /**
     * @Route("/admin", name="admin")
+    * @IsGranted("ROLE_ADMIN")
     */
-    public function index()
+    public function index(ObjectManager $manager)
     {
+        $repo = $this->getDoctrine()->getRepository(Articles::class);
+        $numbersArticles = $repo->findAll();
+
     	$repo = $this->getDoctrine()->getRepository(Articles::class);
     	$articles = $repo->findBy(['category' => ['1', '4', '5', '6', '7']],
                                     ['createdAt' => 'desc'],
@@ -33,15 +38,20 @@ class AdminController extends AbstractController
                                     0);
 
         return $this->render('admin/admin_pages/index.html.twig', [
-            'articles' => $articles
+            'numbersArticles' => $numbersArticles,
+             'articles' => $articles
         ]);
     }
 
     /**
     * @Route("/admin/ligue1", name="admin_ligue_1")
+    * @IsGranted("ROLE_ADMIN")
     */
-    public function categoryLigue1()
+    public function categoryLigue1(ObjectManager $manager)
     {
+        $repo = $this->getDoctrine()->getRepository(Articles::class);
+        $numbersArticles = $repo->findByCategory('1');
+
         $repo = $this->getDoctrine()->getRepository(Articles::class);
         $articles = $repo->findBy(['category' => '1'],
                                      ['createdAt' => 'desc'],
@@ -49,14 +59,21 @@ class AdminController extends AbstractController
                                      0
         );
         return $this->render('admin/admin_pages/ligue1.html.twig', [
-            'articles' => $articles]);
+            'articles' => $articles,
+            'numbersArticles' => $numbersArticles
+           
+        ]);
     }
 
     /**
     * @Route("/admin/actualite", name="admin_actualite")
+    * @IsGranted("ROLE_ADMIN")
     */
     public function categoryActualite()
     {
+        $repo = $this->getDoctrine()->getRepository(Articles::class);
+        $numbersArticles = $repo->findByCategory('2');
+
         $repo = $this->getDoctrine()->getRepository(Articles::class);
         $articles = $repo->findBy(['category' => '2'],
                                      ['createdAt' => 'desc'],
@@ -64,14 +81,19 @@ class AdminController extends AbstractController
                                      0
         );
         return $this->render('admin/admin_pages/actualite.html.twig', [
-            'articles' => $articles]);
+            'articles' => $articles,
+            'numbersArticles' => $numbersArticles]);
     }
 
     /**
     * @Route("/admin/blog", name="admin_blog")
+    * @IsGranted("ROLE_ADMIN")
     */
     public function categoryBlog()
     {
+        $repo = $this->getDoctrine()->getRepository(Articles::class);
+        $numbersArticles = $repo->findByCategory('3');
+
         $repo = $this->getDoctrine()->getRepository(Articles::class);
         $articles = $repo->findBy(['category' => '3'],
                                      ['createdAt' => 'desc'],
@@ -79,14 +101,19 @@ class AdminController extends AbstractController
                                      0
         );
         return $this->render('admin/admin_pages/blog.html.twig', [
-            'articles' => $articles]);
+            'articles' => $articles,
+            'numbersArticles' => $numbersArticles]);
     }
 
     /**
     * @Route("/admin/etranger", name="admin_etranger")
+    * @IsGranted("ROLE_ADMIN")
     */
     public function categoryEtranger()
     {
+        $repo = $this->getDoctrine()->getRepository(Articles::class);
+        $numbersArticles = $repo->findByCategory('4');
+
         $repo = $this->getDoctrine()->getRepository(Articles::class);
         $articles = $repo->findBy(['category' => '4'],
                                      ['createdAt' => 'desc'],
@@ -94,14 +121,19 @@ class AdminController extends AbstractController
                                      0
         );
         return $this->render('admin/admin_pages/etranger.html.twig', [
-            'articles' => $articles]);
+            'articles' => $articles,
+            'numbersArticles' => $numbersArticles]);
     }
 
     /**
     * @Route("/admin/coupedeurope", name="admin_coupe_europe")
+    * @IsGranted("ROLE_ADMIN")
     */
     public function categoryCoupedeurope()
     {
+        $repo = $this->getDoctrine()->getRepository(Articles::class);
+        $numbersArticles = $repo->findByCategory('5');
+
         $repo = $this->getDoctrine()->getRepository(Articles::class);
         $articles = $repo->findBy(['category' => '5'],
                                      ['createdAt' => 'desc'],
@@ -109,14 +141,19 @@ class AdminController extends AbstractController
                                      0
         );
         return $this->render('admin/admin_pages/coupedeurope.html.twig', [
-            'articles' => $articles]);
+            'articles' => $articles,
+            'numbersArticles' => $numbersArticles]);
     }
 
     /**
     * @Route("/admin/bleuinternational", name="admin_bleu_international")
+    * @IsGranted("ROLE_ADMIN")
     */
     public function categoryBleuinternational()
     {
+        $repo = $this->getDoctrine()->getRepository(Articles::class);
+        $numbersArticles = $repo->findByCategory('6');
+
         $repo = $this->getDoctrine()->getRepository(Articles::class);
         $articles = $repo->findBy(['category' => '6'],
                                      ['createdAt' => 'desc'],
@@ -124,14 +161,19 @@ class AdminController extends AbstractController
                                      0
         );
         return $this->render('admin/admin_pages/bleuinternational.html.twig', [
-            'articles' => $articles]);
+            'articles' => $articles,
+            'numbersArticles' => $numbersArticles]);
     }
 
     /**
     * @Route("/admin/mercato", name="admin_mercato")
+    * @IsGranted("ROLE_ADMIN")
     */
     public function categoryMercato()
     {
+        $repo = $this->getDoctrine()->getRepository(Articles::class);
+        $numbersArticles = $repo->findByCategory('7');
+
         $repo = $this->getDoctrine()->getRepository(Articles::class);
         $articles = $repo->findBy(['category' => '7'],
                                      ['createdAt' => 'desc'],
@@ -139,11 +181,13 @@ class AdminController extends AbstractController
                                      0
         );
         return $this->render('admin/admin_pages/mercato.html.twig', [
-            'articles' => $articles]);
+            'articles' => $articles,
+            'numbersArticles' => $numbersArticles]);
     }
 
     /**
 	* @Route("/admin/new", name="admin_create")
+    * @IsGranted("ROLE_ADMIN")
 	*/
 	public function create(Request $request, ObjectManager $manager)
     {
@@ -170,6 +214,7 @@ class AdminController extends AbstractController
 
     /**
     * @Route("/admin/{id}/", name="admin_edit", methods="GET|POST")
+    * @IsGranted("ROLE_ADMIN")
     */
     public function edit(Articles $articles, Request $request, ObjectManager $manager)
     {
@@ -192,17 +237,15 @@ class AdminController extends AbstractController
 	}
 
 	/**
-	* @Route("/admin/{id}/", name="admin_delete", methods="DELETE")
+	* @Route("/admin/{id}/delete", name="admin_delete")
+    * @IsGranted("ROLE_ADMIN")
 	*/
 	public function delete(Articles $articles, Request $request, ObjectManager $manager)
-	{
-		$article = new Articles();
-		if ($this->isCsrfTokenValid('delete'. $article->getId(), $request->get('_token')))
-		{
-			$manager->remove($articles);
-			$manager->flush();
-			$this->addFlash('success', 'Supprimer avec succés');
-		}
+	{	
+		$manager->remove($articles);
+		$manager->flush();
+		$this->addFlash('success', 'Supprimer avec succés');
+		
 		return $this->redirectToRoute('admin');
 	}
 

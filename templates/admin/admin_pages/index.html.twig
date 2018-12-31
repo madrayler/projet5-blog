@@ -5,7 +5,8 @@
 {% block body %}
 <div class="container mb-4">
 	<h1>Gerer les articles</h1>
-	<div>
+	<div class="row">
+		<div class="col-md-6">
 		<h5>Acceder à la liste des articles par categorie</h5>
 		<div class="dropdown">
 	  		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -22,6 +23,10 @@
 			    <a class="dropdown-item" href="{{ path('admin_blog') }}">Blog</a>
 	  		</div>
 		</div>
+		</div>
+		<div class="col-md-3">
+			<h4 class="text-white bg-success text-center">{{ numbersArticles|length }} articles</h4>
+		</div>
 	</div>
 	<div class="row">
 		<div class="text-right col-md-4">
@@ -29,7 +34,7 @@
 		</div>
 
 		<div class="text-left col-md-4">
-			<a href="{{ path('category_index') }}" class="btn btn-primary">Ajouter une categorie</a>
+			<a href="{{ path('category_index') }}" class="btn btn-primary">Gerer les categories</a>
 		</div>
 
 		<div class="text-left col-md-4">
@@ -57,12 +62,8 @@
 				<td>{{ article.title }}</td>
 				<td>{{ article.category.title }}</td>
 				<td>
-					<a href="{{ path('admin_edit', {'id': article.id}) }}" class="btn btn-secondary"> <i class="fas fa-edit"> </i></a>
-					<form method="post" action="{{ path('admin_delete', {id: article.id}) }}" onsubmit="return confirm('Etes vous sûr de Supprimer ?')">
-						<input type="hidden" name="_method" value="DELETE">
-						<input type="hidden" name="_token" value="{{ csrf_token('delete', article.id)}}">
-						<a class="btn btn-danger"> <i class="fas fa-trash-alt"> </i></a>
-					</form>
+					<a href="{{ path('admin_edit', {'id': article.id}) }}" class="btn btn-secondary"><i class="fa fa-pencil"></i></a>
+					<a href="{{ path('admin_delete', {'id': article.id}) }}" onsubmit="return confirm('Etes vous sûr de Supprimer ?')" class="btn btn-danger"><i class="fa fa-trash"></i></a>
 				</td>
 			</tr>
 			{% endfor %}

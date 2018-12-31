@@ -11,6 +11,18 @@ require('../css/app.css');
 
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
-// var $ = require('jquery');
+ var $ = require('jquery');
+
+ global.$ = global.jQuery = $;
+
+ $(document).ready(function(){
+  $('.articles p').css({"height":0});
+
+  $(".articles .anime ").bind("mouseover",function(){
+  	$("p",this).stop(true).animate({"height":"50px"},300);
+  }).bind("mouseout",function(){
+  	$("p",this).stop(true).animate({"height":0},300);
+  })
+});
 
 console.log('Hello Webpack Encore! Edit me in assets/js/app.js');

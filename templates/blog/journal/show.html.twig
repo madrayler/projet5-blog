@@ -13,21 +13,25 @@
 					<img src="{{ vich_uploader_asset(articles, 'imageFile') | imagine_filter('medium') }}" alt="card-img-top" class="float-left">
 				{% endif %}
 				{{ articles.content|raw }}
+				
 			</div>	
 		
 			<section id="commentaires">
-				<h4>{{ articles.comments|length }} Commentaires :</h4>
-				{% for comment in articles.comments %}
+				{% if articles.comments|length > 0 %}
+					<h4>Commentaires :</h4>
+					{% for comment in articles.comments %}
 
-					<span>{{ comment.author|title}}</span> <small>{{ comment.createdAt|date('d/m/y à H:i')}}</small>
-				
-					{{ comment.content|raw}}
-				<hr>
-				{% endfor %}
+						<span>{{ comment.author.username|title}}</span> <small>{{ comment.createdAt|date('d/m/y à H:i')}}</small>
+					
+						{{ comment.content|raw}}
+					<hr>
+					{% endfor %}
+				{% else %}
+					<h4>Cet article n'a pas de commantaire. Soyez le premier à laisser un commentaire</h4>	
+				{% endif %}
 
 			{% if app.user %}
 				{{ form_start(commentForm) }}
-				{#{{ form_row(commentForm.author, {'attr': {'placeholder': "Votre nom"}}) }}#}
 				{{ form_row(commentForm.content, {'attr': {'placeholder': "Votre commentaire"}}) }}
 
 				<button type="submit" class="btn btn-success">Commenter</button>

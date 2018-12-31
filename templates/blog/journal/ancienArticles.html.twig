@@ -1,0 +1,15 @@
+<h2>Articles précédents</h2>
+{% for articles in ancienArticles %}
+	<div class="articles">
+		
+		<a href="{{ path('blog_show',{'id': articles.id})}}">
+			<div class="metadata">
+				<span class="date">{{ articles.createdAt|date('d/m') }}</span>
+			</div>
+			<div class="titreArticles">
+				<h3>{{ articles.title }}</h3>
+			</div>
+		</a>
+			
+	</div>		
+{% endfor %}

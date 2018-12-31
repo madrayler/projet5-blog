@@ -8,7 +8,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 use App\Entity\Articles;
 use App\Entity\Comment;
 use App\Entity\Category;
-use App\Entity\ProgrammeTv;
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\ArticlesRepository;
 use Symfony\Component\Form\Createview;
@@ -78,19 +77,26 @@ class BlogController extends AbstractController
 
         $restArticles = $repo->findBy(['category' => '1'],
                                   ['createdAt' => 'desc'],
-                                  5,
+                                  3,
                                   5
+        );
+
+        $ancienArticles = $repo->findBy(['category' => '1'],
+                                  ['createdAt' => 'desc'],
+                                  15,
+                                  8
         );
 
         $actualite = $repo->findBy(['category' => '2'],
                                   ['createdAt' => 'desc'],
-                                  35
+                                  30
         );
         
         return $this->render('blog/journal/index.html.twig', [
             'dernierArticle' => $dernierArticle,
             'listArticles' => $listArticles,
             'restArticles' => $restArticles,
+            'ancienArticles' => $ancienArticles,
             'actualite' => $actualite
         ]);
     }
@@ -114,19 +120,26 @@ class BlogController extends AbstractController
 
         $restArticles = $repo->findBy(['category' => '4'],
                                   ['createdAt' => 'desc'],
-                                  5,
+                                  3,
                                   5
+        );
+
+        $ancienArticles = $repo->findBy(['category' => '1'],
+                                  ['createdAt' => 'desc'],
+                                  15,
+                                  8
         );
 
         $actualite = $repo->findBy(['category' => '2'],
                                   ['createdAt' => 'desc'],
-                                  35
+                                  30
         );
         
         return $this->render('blog/journal/index.html.twig', [
             'dernierArticle' => $dernierArticle,
             'listArticles' => $listArticles,
             'restArticles' => $restArticles,
+            'ancienArticles' => $ancienArticles,
             'actualite' => $actualite
         ]);
     }
@@ -150,19 +163,26 @@ class BlogController extends AbstractController
 
         $restArticles = $repo->findBy(['category' => '5'],
                                   ['createdAt' => 'desc'],
-                                  5,
+                                  3,
                                   5
+        );
+
+        $ancienArticles = $repo->findBy(['category' => '1'],
+                                  ['createdAt' => 'desc'],
+                                  15,
+                                  8
         );
 
         $actualite = $repo->findBy(['category' => '2'],
                                   ['createdAt' => 'desc'],
-                                  35
+                                  30
         );
         
         return $this->render('blog/journal/index.html.twig', [
             'dernierArticle' => $dernierArticle,
             'listArticles' => $listArticles,
             'restArticles' => $restArticles,
+            'ancienArticles' => $ancienArticles,
             'actualite' => $actualite
         ]);
     }
@@ -186,19 +206,26 @@ class BlogController extends AbstractController
 
         $restArticles = $repo->findBy(['category' => '6'],
                                   ['createdAt' => 'desc'],
-                                  5,
+                                  3,
                                   5
+        );
+
+        $ancienArticles = $repo->findBy(['category' => '1'],
+                                  ['createdAt' => 'desc'],
+                                  15,
+                                  8
         );
 
         $actualite = $repo->findBy(['category' => '2'],
                                   ['createdAt' => 'desc'],
-                                  35
+                                  30
         );
         
         return $this->render('blog/journal/index.html.twig', [
             'dernierArticle' => $dernierArticle,
             'listArticles' => $listArticles,
             'restArticles' => $restArticles,
+            'ancienArticles' => $ancienArticles,
             'actualite' => $actualite
         ]);
     }
@@ -222,19 +249,26 @@ class BlogController extends AbstractController
 
         $restArticles = $repo->findBy(['category' => '7'],
                                   ['createdAt' => 'desc'],
-                                  5,
+                                  3,
                                   5
+        );
+
+        $ancienArticles = $repo->findBy(['category' => '1'],
+                                  ['createdAt' => 'desc'],
+                                  15,
+                                  8
         );
 
         $actualite = $repo->findBy(['category' => '2'],
                                   ['createdAt' => 'desc'],
-                                  35
+                                  30
         );
         
         return $this->render('blog/journal/mercato.html.twig', [
             'dernierArticle' => $dernierArticle,
             'listArticles' => $listArticles,
             'restArticles' => $restArticles,
+            'ancienArticles' => $ancienArticles,
             'actualite' => $actualite
         ]);
     }
@@ -301,7 +335,8 @@ class BlogController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()){
             $comment->setCreatedAt(new \DateTime())
-                    ->setArticle($articles);
+                    ->setArticle($articles)
+                    ->setAuthor($this->getUser());
             $manager->persist($comment);
             $manager->flush();
 
@@ -318,7 +353,8 @@ class BlogController extends AbstractController
 
       return $this->render('blog/journal/blog_perso_show.html.twig', [
             'articles' => $articles,
-            'articlesBlog' => $articlesBlog
+            'articlesBlog' => $articlesBlog,
+            'commentForm' => $form->createView()
             ]);
     }
 

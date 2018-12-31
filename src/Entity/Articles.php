@@ -68,7 +68,7 @@ class Articles
     /**
      * @ORM\Column(type="datetime")
      */
-    private $updated_at;
+   // private $updated_at;
 
     public function __construct()
     {
