@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{% block title %}Footeux{% endblock %}</title>
     {% block stylesheets %}
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
       <link rel="stylesheet" type="text/css" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
       <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/cropperjs/1.4.1/cropper.min.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
       <link rel="stylesheet" href="{{ asset('build/app.css') }}">
-      {#<link rel="icon" type="image/x-icon" href="{{ asset(images/velov.jpg) }}"/>-->#}
+      <link rel="icon" type="image/x-icon" href="{{ asset('build/favicon.ico') }}">
 
     {% endblock %}
   </head>
@@ -21,29 +22,29 @@
   			</button>
 
   			<div class="collapse navbar-collapse" id="navbarColor01">
-    			<ul class="navbar-nav mr-auto">
-      			<li class="nav-item">
+    			<ul id="box" class="navbar-nav mr-auto">
+      			<li class="nav-item blog-accueil">
         			<a class="nav-link" href="{{ path('blog') }}"><i class="fa fa-home"></i><span class="sr-only">(current)</span></a>
 				    </li>
-				    <li class="nav-item">
+				    <li class="nav-item blog-accueil">
 				    	<a class="nav-link" href="{{ path('ligue_un') }}">Ligue 1</a>
 				    </li>
-            <li class="nav-item">
+            <li class="nav-item blog-accueil">
               <a class="nav-link" href="{{ path('etranger') }}">Etranger</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item blog-accueil">
               <a class="nav-link" href="{{ path('coupe_europe') }}">Coupe d'Europe</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item blog-accueil">
               <a class="nav-link" href="{{ path('bleu_international') }}">Bleus-International</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item blog-accueil">
               <a class="nav-link" href="{{ path('mercato') }}">Mercato</a>
             </li>
-      			<li class="nav-item">
+      			<li class="nav-item blog-accueil">
         			<a class="nav-link" href="{{ path('blogperso') }}">Blog</a>
       			</li>
-      			<li class="nav-item">
+      			<li class="nav-item blog-accueil">
         			<a class="nav-link" href="{{ path('bons_plans') }}">Bons Plans</a>
       			</li>
           </ul>
@@ -64,15 +65,45 @@
 	  {% block body %}
 	  {% endblock %}
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    <script src="{{ asset('build/runtime.js') }}"></script>
-    <script src="{{ asset('build/app.js') }}"></script>
+    <footer class="container">
+    <h4> Footeux: 100% football, l'actualité du foot, blog, des transferts et du mercato 24h/24 </h4>
+    <ul>
+      <div class="row">
+        <div class="col-md-4">
+          <h5>Contacts</h5>
+          <li>La redaction</li>
+          <li>Publicité</li>
+          <li>Recrutement</li>
+          <li>Infos légales</li>
+          <li><a href="{{ path('bons_plans') }}">Liens football</a></li>
+        </div>
+        <div class="col-md-4">
+          <h5>Liens privilégiés</h5>
+          <li><a href="{{ path('bons_plans') }}">Liens football</a></li>
+          <li><a href="http://www.actupsg.fr/" target="_blank">Actu-PSG</a></li>
+          <li><a href="http://www.ol-passion.info/" target="_blank">OL Passion</a></li>
+          <li><a href="http://www.om1899.com/" target="_blank">OM 1899</a></li>
+          <li><a href="http://www.algerie-football.net/" target="_blank">Algérie Football</a></li>
+        </div>
+        <div class="col-md-4">
+          <h5>Retrouvez nous également sur:</h5>
+          <li><a href="https://www.facebook.com/mad.bah.3" target="_blank"><i class="fa fa-facebook"></i></a></li>
+          <li><a href="https://twitter.com/madrayler" target="_blank"><i class="fa fa-twitter"></i></a></li>
+          <li><a href="www.linkedin.com/in/mamadou-bah-toulouse" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+          <li><a href="https://www.instagram.com/madrayler/?hl=fr" target="_blank"><i class="fa fa-instagram"></i></li>
+        </div>
+      </div>
+    </ul>
+  </footer>
  
   {% block javascripts %}
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script src="{{ asset('build/runtime.js') }}"></script>
+    <script src="{{ asset('build/app.js') }}"></script>
 
   {% endblock %}
 </html>

@@ -18,7 +18,7 @@
 		
 			<section id="commentaires">
 				{% if articles.comments|length > 0 %}
-					<h4>Commentaires :</h4>
+					<h4>{{ articles.comments|length }}Commentaires :</h4>
 					{% for comment in articles.comments %}
 
 						<span>{{ comment.author.username|title}}</span> <small>{{ comment.createdAt|date('d/m/y à H:i')}}</small>

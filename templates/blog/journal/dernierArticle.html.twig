@@ -3,20 +3,17 @@
 	<div class="title">
 		<h3><a href="{{ path('blog_show',{'id': article.id}) }}">{{ article.title }}</a></h3>
 	</div>
-	<div class="content">
-		<div class="row">
+	<div class="row content">
 			<div class="col-md-6">
 				{% if article.imagename %}
 					<a href="{{ path('blog_show',{'id': article.id}) }}"><img src="{{ vich_uploader_asset(article, 'imageFile') }}" alt="card-img-top"></a>
 				{% endif %}
 			</div>
 			<div class="col-md-6 text">
-				<div class="metadata">
-					<span class="date">{{ article.createdAt | date('d/m') }}</span> - {{ article.content|slice(0,350)|raw }}
-				</div>
+				<span class="date">{{ article.createdAt | date('d/m') }}</span> - {{ article.content|slice(0,350)|raw }}
+				
 				<a href="{{ path('blog_show',{'id': article.id}) }}">Lire...</a>
 			</div>
-		</div>
 	</div>
 
 	{% endfor %}

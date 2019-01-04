@@ -8,7 +8,7 @@
 		
 		<div class="titreRestArticles"><a href="{{ path('blog_show',{'id': article.id}) }}">{{ article.title }}</a></div>
 		
-		<div class="text">
+		<div class="textRest">
 			<div class="metadata">
 				<span class="date">{{ article.createdAt | date('d/m') }}</span> - {{ article.content|slice(0,200)|raw }}
 			</div>

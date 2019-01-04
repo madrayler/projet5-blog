@@ -45,6 +45,12 @@ class BlogController extends AbstractController
                                   5
         );
 
+        $ancienArticles = $repo->findBy(['category' => ['1', '4', '5', '6', '7']],
+                                  ['createdAt' => 'desc'],
+                                  15,
+                                  8
+        );
+
         $actualite = $repo->findBy(['category' => '2'],
                                   ['createdAt' => 'desc'],
                                   35
@@ -54,6 +60,7 @@ class BlogController extends AbstractController
             'dernierArticle' => $dernierArticle,
             'listArticles' => $listArticles,
             'restArticles' => $restArticles,
+            'ancienArticles' => $ancienArticles,
             'actualite' => $actualite
         ]);
     }

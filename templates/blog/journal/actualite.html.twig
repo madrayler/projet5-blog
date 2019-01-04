@@ -1,11 +1,13 @@
 
 	<h4>Fil d'actualités 24h/24</h4>
 	{% for articles in actualite %}
-		<div class="metadata">
+		<div class="metadata row">
+		<div class="col-md-2">
 			<span class="date">{{ articles.createdAt|date('d/m') }}</span>
-			<a href="{{ path('blog_show',{'id': articles.id}) }}" class="titreActualite">{{ articles.title }}</a>
+		</div>
+		<div class="col-md-10">
+			<a href="{{ path('blog_show',{'id': articles.id}) }}" class="titreActualite" target="_blank">{{ articles.title }}</a>
+		</div>
 		</div>
 	{% endfor %}
-
-
 

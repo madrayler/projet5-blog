@@ -17,10 +17,32 @@
 	font-size: 1.5em;
 	font-weight: bold;
 }
-nav
+
+.blog-accueil:hover
 {
-	height: 40px;
+	color:white;
 }
+
+footer
+{
+	background-color: #1f3a93;
+	color: white;
+}
+footer a
+{
+	color: white;
+	text-decoration: none;
+}
+footer li
+{
+	padding-left: 20px;
+}
+footer h4
+{
+	background-color: #4d05e8;
+	text-align: center;
+}
+
 
 
 /*BLOG*/
@@ -31,8 +53,7 @@ nav
 }
 .content
 {
-	background-color: blue;
-	color: white;
+	width: 100%;
 }
 .content img
 {
@@ -42,6 +63,9 @@ nav
 {
 	width: 100%;
 	text-align: justify;
+	background-color: blue;
+	color: white;
+	padding-top: 20px;
 }
 .date
 {
@@ -65,6 +89,7 @@ nav
 {
 	padding: 10px;
 	background-color: #dadfe1;
+	height: 300px;
 }
 .survole:hover
 {
@@ -136,6 +161,11 @@ nav
 {
 	width: 100%;
 }
+.textRest
+{
+	width: 100%;
+	text-align: justify;
+}
 
 /*SHOW*/
 
@@ -172,8 +202,8 @@ nav
 .blog
 {
 	margin-top: 20px;
-	margin-right: 85px;
-	margin-left: 90px;
+	margin-right: 120px;
+	margin-left: 125px;
 }
 .blog a
 {
@@ -203,8 +233,8 @@ nav
 }
 .login_register
 {
-	margin-right: 300px;
-	margin-left: 300px;
+	/*margin-right: 300px;
+	margin-left: 300px;*/
 }
 .login_register h2
 {
@@ -287,12 +317,9 @@ nav
 /*AJOUTER UN ARTICLE*/
 .createArticle
 {
-	margin-right: 150px;
-	margin-left: 150px;
 	background-color: #c5eff7;
 	padding-right: 50px;
 	padding-left: 50px;
-	padding-bottom: 20px;
 }
 .createArticle h1
 {
